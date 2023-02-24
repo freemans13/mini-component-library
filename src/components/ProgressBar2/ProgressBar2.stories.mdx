@@ -1,0 +1,30 @@
+import { Meta, Story } from "@storybook/addon-docs/blocks";
+import ProgressBar2 from "./ProgressBar2";
+
+<Meta
+  title="ProgressBar2"
+  component={ProgressBar2}
+  argTypes={{
+    value: {
+      control: {
+        type: "number",
+        min: 0,
+        max: 100,
+      },
+    },
+    size: {
+      control: {
+        type: "select",
+        options: ["small", "medium", "large"],
+      },
+    },
+  }}
+/>
+
+export const Template = (args) => <ProgressBar2 {...args} />;
+
+# ProgressBar2
+
+<Story name="Default" args={{ value: 50, size: "medium" }}>
+  {Template.bind({})}
+</Story>

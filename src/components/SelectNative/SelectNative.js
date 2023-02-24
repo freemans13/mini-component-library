@@ -3,20 +3,14 @@ import styled from "styled-components";
 
 import { COLORS } from "../../constants";
 import Icon from "../Icon";
-import { getDisplayedValue } from "./Select.helpers";
 
-const Select = ({ label, value, onChange, children }) => {
-  const displayedValue = getDisplayedValue(value, children);
-
+const SelectNative = ({ label, value, onChange, children }) => {
   return (
     <Wrapper>
       <NativeSelect value={value} onChange={onChange}>
         {children}
       </NativeSelect>
-      <FakeSelect>
-        {displayedValue}
-        <Chevron id="chevron-down" strokeWidth={2} size={16} />
-      </FakeSelect>
+      <Chevron id="chevron-down" strokeWidth={2} size={16} />
     </Wrapper>
   );
 };
@@ -28,16 +22,6 @@ const Wrapper = styled.div`
 `;
 
 const NativeSelect = styled.select`
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  appearance: none;
-`;
-
-const FakeSelect = styled.div`
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
@@ -47,19 +31,14 @@ const FakeSelect = styled.div`
   padding: 12px 48px 12px 12px;
   color: ${COLORS.gray700};
   border-radius: 6px;
-
-  ${NativeSelect}:focus + & {
-    outline: 1px dotted #212121;
-    outline: 5px auto -webkit-focus-ring-color;
-  }
-
-  ${NativeSelect}:hover + & {
+  border: none;
+  appearance: none;
+  &:hover {
     color: ${COLORS.black};
   }
 `;
 
 const Chevron = styled(Icon)`
-  /* display: block; */
   position: absolute;
   top: 0px;
   bottom: 0px;
@@ -68,6 +47,10 @@ const Chevron = styled(Icon)`
   height: 12px;
   margin: auto;
   pointer-events: none;
+  color: ${COLORS.gray700};
+  ${NativeSelect}:hover + & {
+    color: ${COLORS.black};
+  }
 `;
 
-export default Select;
+export default SelectNative;
